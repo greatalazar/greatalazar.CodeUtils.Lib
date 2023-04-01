@@ -27,7 +27,7 @@ jobs:
       - name: Build
         run: dotnet build -c Release --no-restore ./src/
       - name: Create nuget package
-        run: dotnet pack -c Release
+        run: dotnet pack -c Release ./src/
       - name: Push nuget package
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
