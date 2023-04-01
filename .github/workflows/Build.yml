@@ -11,26 +11,27 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
         with:
           submodules: recursive
           fetch-depth: 0
-      - name: Setup Dotnet 6
-        uses: actions/setup-dotnet@v2
+      - name: Setup dotnet 7
+        uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 6.0.x
+          dotnet-version: 7.0.x
       - name: Restore
-        run: dotnet restore .\src\
+        run: dotnet restore ./src/
       - name: Build
-        run: dotnet build -c Release --no-restore .\src\
-      - name: Publish
-        run: dotnet publish -c Release --no-restore .\src\
-      - name: Zip Published Files
-        run: 7z a -t7z -mx=9 ArduinoConnex-v${{ env.GitVersion_SemVer }}.7z .\src\ArduinoConnex\bin\Release\net6.0-windows\publish\*
-      - name: Create release
-        run: gh release create v${{ env.GitVersion_SemVer }} --generate-notes ArduinoConnex-v${{ env.GitVersion_SemVer }}.7z
+        run: dotnet build -c Release --no-restore ./src/
+      - name: Create nuget package
+        run: dotnet pack -c Release
+      - name: Push nuget package
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: |
+          dotnet push src/greatalazar.CodeUtils.Lib/bin/Release/greatalazar.CodeUtils.Lib.${{ env.GitVersion_SemVer }}.nupkg \
+          --api-key ${{ env.NUGET_API_KEY }} \
+          -s https://api.nuget.org/v3/index.json
