@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33513.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "greatalazar.CodeUtils.Lib", "greatalazar.CodeUtil.Lib\greatalazar.CodeUtils.Lib.csproj", "{317D6594-89EE-44E0-B456-9DD95CDC7C5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "greatalazar.CodeUtils.Lib", "greatalazar.CodeUtils.Lib\greatalazar.CodeUtils.Lib.csproj", "{317D6594-89EE-44E0-B456-9DD95CDC7C5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "greatalazar.CodeUtil.Lib.Tests", "greatalazar.CodeUtil.Lib.Tests\greatalazar.CodeUtil.Lib.Tests.csproj", "{6704F4C6-EA8B-4C47-82FA-2E296079E4DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "greatalazar.CodeUtil.Lib.Tests", "greatalazar.CodeUtils.Lib.Tests\greatalazar.CodeUtils.Lib.Tests.csproj", "{6704F4C6-EA8B-4C47-82FA-2E296079E4DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

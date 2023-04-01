@@ -1,0 +1,36 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - 'main'
+    tags:
+      - 'v*'
+    paths:
+      - 'src/*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          fetch-depth: 0
+      - name: Setup Dotnet 6
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.0.x
+      - name: Restore
+        run: dotnet restore .\src\
+      - name: Build
+        run: dotnet build -c Release --no-restore .\src\
+      - name: Publish
+        run: dotnet publish -c Release --no-restore .\src\
+      - name: Zip Published Files
+        run: 7z a -t7z -mx=9 ArduinoConnex-v${{ env.GitVersion_SemVer }}.7z .\src\ArduinoConnex\bin\Release\net6.0-windows\publish\*
+      - name: Create release
+        run: gh release create v${{ env.GitVersion_SemVer }} --generate-notes ArduinoConnex-v${{ env.GitVersion_SemVer }}.7z
