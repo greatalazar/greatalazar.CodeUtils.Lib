@@ -27,11 +27,18 @@ jobs:
       - name: Build
         run: dotnet build -c Release --no-restore ./src/
       - name: Create nuget package
-        run: dotnet pack -c Release
-      - name: Push nuget package
+        run: dotnet pack -c Release ./src/
+      #- name: Push nuget package to github packages 
+      #  env:
+      #    GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #  run: |
+      #    dotnet nuget push ./src/greatalazar.CodeUtils.Lib/bin/Release/greatalazar.CodeUtils.Lib.${{ env.GitVersion_SemVer }}.nupkg \
+      #    --api-key ${{ env.GH_TOKEN }} \
+      #    -s https://nuget.pkg.github.com/greatalazar/index.json
+      - name: Push nuget package to Nuget
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
         run: |
-          dotnet push src/greatalazar.CodeUtils.Lib/bin/Release/greatalazar.CodeUtils.Lib.${{ env.GitVersion_SemVer }}.nupkg \
+          dotnet nuget push ./src/greatalazar.CodeUtils.Lib/bin/Release/greatalazar.CodeUtils.Lib.${{ env.GitVersion_SemVer }}.nupkg \
           --api-key ${{ env.NUGET_API_KEY }} \
           -s https://api.nuget.org/v3/index.json
