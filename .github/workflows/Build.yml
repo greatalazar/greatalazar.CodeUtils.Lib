@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -32,4 +32,6 @@ jobs:
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
         run: |
-          dotnet nuget push ./src/greatalazar.CodeUtils.Lib/bin/Release/greatalazar.CodeUtils.Lib.${{ env.GitVersion_SemVer }}.nupkg --api-key ${{ env.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
+          dotnet nuget push ./src/greatalazar.CodeUtils.Lib/bin/Release/greatalazar.CodeUtils.Lib.${{ env.GitVersion_SemVer }}.nupkg \
+          --api-key ${{ env.NUGET_API_KEY }} \
+          -s https://api.nuget.org/v3/index.json
