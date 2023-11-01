@@ -4,8 +4,7 @@ namespace greatalazar.CodeUtils.Lib.CodingHelpers;
 
 public static class LoopUtilities
 {
-	#region looopy
-
+	//TODO: add a way to break
 	#region ForLoop
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -25,7 +24,7 @@ public static class LoopUtilities
 			callback(x);
 		}
 	}
-	
+
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static async Task ForLoopAsync(int _x, Func<int, Task> callback)
 	{
@@ -55,7 +54,7 @@ public static class LoopUtilities
 			}
 		}
 	}
-	
+
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static void ForLoop2(int start_x, int start_y, int _x, int _y, Action<int, int> callback)
 	{
@@ -223,7 +222,7 @@ public static class LoopUtilities
 			}
 		}
 	}
-	
+
 	#endregion
 
 	#region foreach for all
@@ -237,16 +236,5 @@ public static class LoopUtilities
 		}
 	}
 
-	#endregion
-	
-	#region loop string helpers
-	
-	public static string JoinStrings(this IEnumerable<string> ip, string separator = ", ")
-	{
-		return string.Join(separator, ip);
-	}
-	
-	#endregion
-	
 	#endregion
 }
