@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 
 namespace greatalazar.CodeUtils.Lib.CodingHelpers;
 
@@ -28,5 +29,17 @@ public static class StringUtilities
 	public static string ToKeyValueString(this KeyValuePair<string, string> ip, string seprator = "=")
 	{
 		return $"{ip.Key}{seprator}{ip.Value}";
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static string RemoveEmojis(this string ip)
+	{
+		return Regex.Replace(ip, @"\p{Cs}", "");
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static string JoinStrings(this IEnumerable<string> ip, string separator = ", ")
+	{
+		return string.Join(separator, ip);
 	}
 }
