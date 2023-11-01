@@ -9,7 +9,6 @@
 	<PropertyGroup>
 		<Authors>greatalazar</Authors>
 		<Company>greatalazar</Company>
-		<Copyright>Copyright © greatalazar 2023</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
