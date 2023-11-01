@@ -1,4 +1,5 @@
 ﻿using greatalazar.CodeUtils.Lib.ArgumentValidation;
+using System.Runtime.CompilerServices;
 
 namespace greatalazar.CodeUtils.Lib.CodingHelpers;
 
@@ -45,13 +46,28 @@ public static class FileSystemUtilities
 		return Path.Combine(newDirectory, Path.GetFileName(filePath));
 	}
 
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static string AppendPath(this string ip, params string[] oips)
+	{
+		Guard.Argument(ip, nameof(ip)).NotNullOrEmpty();
+
+		return Path.Combine(new[] { ip }.Concat(oips).ToArray());
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static FileInfo ToFileInfo(this string filePath)
 	{
+		Guard.Argument(filePath, nameof(filePath)).NotNullOrEmpty();
+
 		return new FileInfo(filePath);
 	}
 
-	public static DirectoryInfo ToDirectoryInfo(this string filePath)
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static DirectoryInfo ToDirectoryInfo(this string dirPath)
 	{
-		return new DirectoryInfo(filePath);
+		Guard.Argument(dirPath, nameof(dirPath)).NotNullOrEmpty();
+
+		return new DirectoryInfo(dirPath);
 	}
 }
